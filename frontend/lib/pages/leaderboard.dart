@@ -58,14 +58,14 @@ class MyItem extends StatelessWidget {
 
             ),
           ),
-          title: Text(' #Teacher${index + 1}'),
+          title: Text(' #Teacher${index + 1}', style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),),
         ),
       );
     } else {
       return Container(
         decoration: BoxDecoration(
           color: Color(0xff0C0440),
-          borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+
         ),
         child: ListTile(
           contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/components/bottomnav.dart';
-import 'package:frontend/components/navigation.dart';
+import 'package:frontend/components/navigation.dart'; // Ensure the import path is correct
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -10,13 +10,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int _selectedIndex = 0;
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,10 +23,9 @@ class _HomeState extends State<Home> {
         backgroundColor: const Color(0xff0C0440),
         iconTheme: const IconThemeData(color: Colors.white),
       ),
-      body: Container(),
-      bottomNavigationBar: CustomBottomNavBar(
-          currentIndex: _selectedIndex, onTap: _onItemTapped),
-      drawer: const Navbar(),
+      body: Container(), // Add your page content here
+      bottomNavigationBar: Bottomnav(),
+      drawer: const Navbar(), // Ensure the Navbar component is correct
     );
   }
 }

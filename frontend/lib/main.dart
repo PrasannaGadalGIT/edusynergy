@@ -3,7 +3,7 @@ import 'package:frontend/pages/about.dart';
 import 'package:frontend/pages/coursepage.dart';
 import 'package:frontend/pages/historypage.dart';
 import 'package:frontend/pages/home.dart';
-import 'package:frontend/pages/leaderboard.dart';
+// import 'package:frontend/pages/leaderboard.dart';
 import 'package:frontend/pages/profilepage.dart';
 import 'package:frontend/pages/verificationpage.dart';
 
@@ -29,7 +29,7 @@ class _EduSynergyState extends State<EduSynergy> {
         '/verification': (context) => const VerificationPage(),
         '/courses': (context) => const CoursesPage(),
         '/history': (context) => const HistoryPage(),
-        '/leaderboard': (context) => const Leaderboard(),
+        // '/leaderboard': (context) => const Leaderboard(),
         '/about': (context) => const About(),
       },
       home: const Home(),

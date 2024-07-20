@@ -44,36 +44,39 @@ class _IntroPageState extends State<IntroPage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 //prev
-                onFirstPage
-                    ? GestureDetector(
-                  onTap: () {
-                    _controller.previousPage(
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.easeIn,
-                    );
-                  },
-                  child: const Text(
-                    '     ',
-                    style: TextStyle(
-                      fontSize: 25,
-                      color: Colors.white54,
-                      fontWeight: FontWeight.bold,
+                Padding(
+                  padding: const EdgeInsets.all(0.0),
+                  child: onFirstPage
+                      ? GestureDetector(
+                    onTap: () {
+                      _controller.previousPage(
+                        duration: Duration(milliseconds: 500),
+                        curve: Curves.easeIn,
+                      );
+                    },
+                    child: const Text(
+                      '     ',
+                      style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.white54,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                )
-                    : GestureDetector(
-                  onTap: () {
-                    _controller.previousPage(
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.easeIn,
-                    );
-                  },
-                  child: const Text(
-                    'Prev',
-                    style: TextStyle(
-                      fontSize: 25,
-                      color: Colors.white54,
-                      fontWeight: FontWeight.bold,
+                  )
+                      : GestureDetector(
+                    onTap: () {
+                      _controller.previousPage(
+                        duration: Duration(milliseconds: 500),
+                        curve: Curves.easeIn,
+                      );
+                    },
+                    child: const Text(
+                      'Prev',
+                      style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.white54,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
@@ -91,7 +94,7 @@ class _IntroPageState extends State<IntroPage> {
                     );
                   },
                   child: const Text(
-                    'Done',
+                    'Get Started',
                     style: TextStyle(
                       fontSize: 25,
                       color: Colors.white54,

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-
-void main() {
-  runApp(Home());
-}
+import 'package:frontend/components/navigation.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -16,8 +13,17 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: const Text(
+          'EduSynergy',
+          style: TextStyle(
+              color: Colors.white, fontFamily: 'Times New Roman', fontSize: 25),
+        ),
+        centerTitle: true,
         backgroundColor: const Color(0xff0C0440),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
+      body: Container(),
+      drawer: Navbar(),
     );
   }
 }

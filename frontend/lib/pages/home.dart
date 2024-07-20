@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/components/bottomnav.dart';
 import 'package:frontend/components/navigation.dart';
 
 class Home extends StatefulWidget {
@@ -9,6 +10,13 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  int _selectedIndex = 0;
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +31,9 @@ class _HomeState extends State<Home> {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: Container(),
-      drawer: Navbar(),
+      bottomNavigationBar: CustomBottomNavBar(
+          currentIndex: _selectedIndex, onTap: _onItemTapped),
+      drawer: const Navbar(),
     );
   }
 }

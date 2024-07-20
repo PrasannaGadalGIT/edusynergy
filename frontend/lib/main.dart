@@ -22,6 +22,7 @@ class _EduSynergyState extends State<EduSynergy> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       routes: {
         '/profile': (context) => const Profilepage(),
         '/home': (context) => const Home(),

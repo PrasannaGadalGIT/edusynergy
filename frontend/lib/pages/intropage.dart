@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/pages/home.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'intropages/intro_page1.dart';
 import 'intropages/intro_page2.dart';
@@ -109,12 +110,15 @@ class _IntroPageState extends State<IntroPage> {
                       curve: Curves.easeIn,
                     );
                   },
-                  child: const Text(
-                    'Next',
-                    style: TextStyle(
-                      fontSize: 25,
-                      color: Colors.white54,
-                      fontWeight: FontWeight.bold,
+                  child: GestureDetector(
+                    onTap: (){Navigator.pushNamed(context, '/home');
+                    child: const Text(
+                      'Next',
+                      style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.white54,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),

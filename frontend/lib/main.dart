@@ -1,19 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/pages/about.dart';
+import 'package:frontend/pages/coursepage.dart';
+import 'package:frontend/pages/historypage.dart';
+import 'package:frontend/pages/home.dart';
 import 'package:frontend/pages/intropage.dart';
+import 'package:frontend/pages/profilepage.dart';
+import 'package:frontend/pages/verificationpage.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const EduSynergy());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class EduSynergy extends StatefulWidget {
+  const EduSynergy({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<EduSynergy> createState() => _EduSynergyState();
+}
+
+class _EduSynergyState extends State<EduSynergy> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: IntroPage(),
+      routes: {
+        '/profile': (context) => const Profilepage(),
+        '/home': (context) => const Home(),
+        '/verification': (context) => const VerificationPage(),
+        '/courses': (context) => const CoursesPage(),
+        '/history': (context) => const HistoryPage(),
+        // '/leaderboard': (context) => const Leaderboard(),
+        '/about': (context) => const About(),
+      },
+      home: const IntroPage(),
     );
   }
 }

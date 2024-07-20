@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'djongo',
-    'demo',
+    'userauthentication',
     "corsheaders",
 
 ]
@@ -55,7 +55,8 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
 ]
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:57665',  # Add your Flutter app's origin here
+    'http://localhost:56509',  # Add your Flutter app's origin here
+    'http://127.0.0.1:8000',
 ]
 
 CORS_ALLOW_METHODS = [

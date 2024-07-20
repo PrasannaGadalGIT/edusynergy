@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/components/bottomnav.dart';
 import 'package:frontend/components/navigation.dart';
-import 'package:frontend/components/card.dart';
+
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -30,9 +30,7 @@ class _HomeState extends State<Home> {
         backgroundColor: const Color(0xff0C0440),
         iconTheme: const IconThemeData(color: Colors.white),
       ),
-      body: Container(
-          child: Center(child: UserInteractionCard())
-      ),
+      body: Container(),
       bottomNavigationBar: CustomBottomNavBar(
           currentIndex: _selectedIndex, onTap: _onItemTapped),
       drawer: const Navbar(),

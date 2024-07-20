@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/components/bottomnav.dart';
-import 'package:frontend/components/navigation.dart'; // Ensure the import path is correct
+import 'package:frontend/components/navigation.dart';
+
+import '../screens/ask_screen.dart';
+import '../screens/homepage_screen.dart';
+import '../screens/leaderboard_screen.dart';
+import '../screens/search_screen.dart';
+import '../screens/settings_screen.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -10,6 +16,24 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  int _currentIndex = 0; // Default to the Home tab
+
+  final List<Widget> _screens = [
+    const HomepageScreen(), // Home screen
+    const SearchScreen(), // Search screen
+    const AskScreen(), // Ask screen
+    const LeaderboardScreen(), // Leaderboard screen
+    const SettingsScreen(), // Settings screen
+  ];
+
+  void _onTabSelected(int index) {
+    if (index >= 0 && index < _screens.length) {
+      setState(() {
+        _currentIndex = index;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,8 +47,11 @@ class _HomeState extends State<Home> {
         backgroundColor: const Color(0xff0C0440),
         iconTheme: const IconThemeData(color: Colors.white),
       ),
-      body: Container(), // Add your page content here
-      bottomNavigationBar: Bottomnav(),
+      body: _screens[_currentIndex],
+      bottomNavigationBar: Bottomnav(
+        currentIndex: _currentIndex,
+        onTap: _onTabSelected,
+      ),
       drawer: const Navbar(), // Ensure the Navbar component is correct
     );
   }

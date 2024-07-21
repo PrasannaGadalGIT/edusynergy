@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart'; // Import the provider package
-import 'package:frontend/state/theme_provider.dart'; // Import your ThemeProvider
-import 'package:frontend/state/notification_settings_provider.dart'; // Import your NotificationSettingsProvider
+import 'package:frontend/screens/settings_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:frontend/state/theme_provider.dart';
+import 'package:frontend/state/notification_settings_provider.dart';
 import 'package:frontend/pages/about.dart';
 import 'package:frontend/pages/coursepage.dart';
 import 'package:frontend/pages/historypage.dart';
@@ -11,7 +12,7 @@ import 'package:frontend/pages/login.dart';
 import 'package:frontend/pages/password_reset.dart';
 import 'package:frontend/pages/profilepage.dart';
 import 'package:frontend/pages/register.dart';
-import 'package:frontend/pages/verificationpage.dart';
+import 'package:frontend/screens/leaderboard_screen.dart';
 
 void main() {
   runApp(
@@ -35,16 +36,18 @@ class EduSynergy extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: themeProvider.themeData,
-          routes: {
+          routes: <String, WidgetBuilder>{
             '/profile': (context) => const Profilepage(),
             '/home': (context) => const Home(),
-            '/verification': (context) => const VerificationPage(),
+            '/leaderboard': (context) => const LeaderboardScreen(),
             '/courses': (context) => const CoursesPage(),
             '/history': (context) => const HistoryPage(),
             '/about': (context) => const About(),
             '/login': (context) => const LoginPage(),
             '/register': (context) => const Register(),
             '/pass_rest': (context) => const PasswordResetPage(),
+            '/settings': (context) => const SettingsScreen()
+            // Handle error or missing arguments
           },
           home: const IntroPage(),
         );

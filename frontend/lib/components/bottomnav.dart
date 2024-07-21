@@ -16,7 +16,7 @@ class Bottomnav extends StatelessWidget {
       backgroundColor: const Color(0xff0C0440),
       currentIndex: currentIndex,
       onTap: (index) {
-        if (index >= 0 && index < 5) {
+        if (index >= 0 && index < 4) {
           // Ensure index is within valid range
           onTap(index);
         }
@@ -29,10 +29,6 @@ class Bottomnav extends StatelessWidget {
         BottomNavigationBarItem(
           icon: Icon(Icons.search),
           label: 'Search',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.add),
-          label: 'Ask',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.leaderboard),

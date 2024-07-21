@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/question_card.dart';
+import 'package:frontend/screens/questioncard.dart';
 
 class HomepageScreen extends StatefulWidget {
   const HomepageScreen({super.key});
@@ -39,6 +39,7 @@ class _HomepageScreenState extends State<HomepageScreen> {
             userName: questionData['userName']!,
             question: questionData['question']!,
             questionId: '',
+            questionText: '',
           );
         },
       ),

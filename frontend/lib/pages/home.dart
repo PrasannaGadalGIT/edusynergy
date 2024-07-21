@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/components/bottomnav.dart';
 import 'package:frontend/components/navigation.dart';
-
-import '../screens/ask_screen.dart';
-import '../screens/homepage_screen.dart';
-import '../screens/leaderboard_screen.dart';
-import '../screens/search_screen.dart';
-import '../screens/settings_screen.dart';
+import 'package:frontend/screens/homepage_screen.dart';
+import 'package:frontend/screens/search_screen.dart';
+import 'package:frontend/screens/leaderboard_screen.dart';
+import 'package:frontend/screens/settings_screen.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -21,7 +19,6 @@ class _HomeState extends State<Home> {
   final List<Widget> _screens = [
     const HomepageScreen(), // Home screen
     const SearchScreen(), // Search screen
-    const AskScreen(), // Ask screen
     const LeaderboardScreen(), // Leaderboard screen
     const SettingsScreen(), // Settings screen
   ];
@@ -47,7 +44,7 @@ class _HomeState extends State<Home> {
         backgroundColor: const Color(0xff0C0440),
         iconTheme: const IconThemeData(color: Colors.white),
       ),
-      body: _screens[_currentIndex],
+      body: _screens[_currentIndex], // Ensure the correct screen is shown
       bottomNavigationBar: Bottomnav(
         currentIndex: _currentIndex,
         onTap: _onTabSelected,

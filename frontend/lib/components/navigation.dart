@@ -25,19 +25,17 @@ class _NavbarState extends State<Navbar> {
       case 1:
         Navigator.pushNamed(context, '/home'); // Example route
         break;
+      // Example route
       case 2:
-        Navigator.pushNamed(context, '/verification'); // Example route
-        break;
-      case 3:
         Navigator.pushNamed(context, '/courses'); // Example route
         break;
-      case 4:
+      case 3:
         Navigator.pushNamed(context, '/history'); // Example route
         break;
-      case 5:
-        Navigator.pushNamed(context, '/leaderboard'); // Example route
+      case 4:
+        Navigator.pushNamed(context, "/leaderboard"); // Example route
         break;
-      case 6:
+      case 5:
         Navigator.pushNamed(context, '/about'); // Example route
         break;
       default:

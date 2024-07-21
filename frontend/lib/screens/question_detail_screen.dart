@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-
+import 'package:frontend/state/comment_provider.dart';
 class QuestionDetailScreen extends StatefulWidget {
-  final String profileImageUrl;
+
   final String userName;
   final String question;
   final DateTime questionDate;
   final List<Map<String, dynamic>> answers;
 
   const QuestionDetailScreen({
-    required this.profileImageUrl,
+
     required this.userName,
     required this.question,
     required this.questionDate,
     this.answers = const [], // Default to an empty list if not provided
-    Key? key,
+    Key? key, required profileImageUrl,
   }) : super(key: key);
 
   @override
@@ -58,10 +58,7 @@ class _QuestionDetailScreenState extends State<QuestionDetailScreen> {
               children: [
                 Row(
                   children: [
-                    CircleAvatar(
-                      backgroundImage: NetworkImage(widget.profileImageUrl),
-                      radius: 30,
-                    ),
+
                     const SizedBox(width: 10),
                     Expanded(
                       child: Column(

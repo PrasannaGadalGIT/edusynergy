@@ -144,6 +144,7 @@ class SettingsScreen extends StatelessWidget {
             title: const Text('Logout'),
             onTap: () {
               // Handle logout
+
             },
           ),
           ListTile(

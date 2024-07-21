@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart'; // Import the provider package
-import 'package:frontend/state/theme_provider.dart'; // Import your ThemeProvider
-import 'package:frontend/state/notification_settings_provider.dart'; // Import your NotificationSettingsProvider
+import 'package:provider/provider.dart';
+import 'package:frontend/state/theme_provider.dart';
+import 'package:frontend/state/notification_settings_provider.dart';
 import 'package:frontend/pages/about.dart';
 import 'package:frontend/pages/coursepage.dart';
 import 'package:frontend/pages/historypage.dart';
@@ -12,13 +12,18 @@ import 'package:frontend/pages/password_reset.dart';
 import 'package:frontend/pages/profilepage.dart';
 import 'package:frontend/pages/register.dart';
 import 'package:frontend/pages/verificationpage.dart';
-
+import 'package:frontend/state/auth_provider.dart';
+import 'package:frontend/state/post_provider.dart';
+import 'package:frontend/state/comment_provider.dart';
 void main() {
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => NotificationSettingsProvider()),
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => PostProvider()),
+        ChangeNotifierProvider(create: (_) => CommentProvider())
       ],
       child: const EduSynergy(),
     ),
@@ -46,7 +51,7 @@ class EduSynergy extends StatelessWidget {
             '/register': (context) => const Register(),
             '/pass_rest': (context) => const PasswordResetPage(),
           },
-          home: const IntroPage(),
+          home: const LoginPage(),
         );
       },
     );

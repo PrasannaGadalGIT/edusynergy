@@ -1,6 +1,11 @@
+import 'dart:convert';
+
+
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/question_card.dart';
-
+import 'package:frontend/state/post_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 class HomepageScreen extends StatefulWidget {
   const HomepageScreen({super.key});
 
@@ -9,36 +14,45 @@ class HomepageScreen extends StatefulWidget {
 }
 
 class _HomepageScreenState extends State<HomepageScreen> {
-  // Example data
-  final List<Map<String, String>> questions = [
-    {
-      'profileImageUrl': 'https://example.com/profile1.jpg',
-      'userName': 'John Doe',
-      'question': 'What is the best way to learn Flutter?',
-      'answer': 'Practice and build real projects.',
-    },
-    {
-      'profileImageUrl': 'https://example.com/profile2.jpg',
-      'userName': 'Jane Smith',
-      'question': 'How can I improve my Dart skills?',
-      'answer': 'Study the official documentation and practice coding.',
-    },
-    // Add more question data here
-  ];
+  List<Map<String, dynamic>> questions = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _submitQuestion(); // Call the _submitQuestion function here
+  }
+
+  Future<void> _submitQuestion() async {
+    try {
+      final response = await http.get(
+        Uri.parse('http://127.0.0.1:8000/userInteraction/postData/'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      );
+      final data = jsonDecode(response.body);
+      setState(() {
+        questions = data['data'].cast<Map<String, dynamic>>();
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
+      body: questions.isEmpty
+          ? Center(child: CircularProgressIndicator())
+          : ListView.builder(
         padding: const EdgeInsets.all(10),
         itemCount: questions.length,
         itemBuilder: (context, index) {
           final questionData = questions[index];
           return QuestionCard(
-            profileImageUrl: questionData['profileImageUrl']!,
-            userName: questionData['userName']!,
-            question: questionData['question']!,
-            questionId: '',
+            userName: questionData['username'] ?? 'no username',
+            question: questionData['content'] ?? 'no content',
+            questionId: questionData['postId'] ?? "no post id",
           );
         },
       ),

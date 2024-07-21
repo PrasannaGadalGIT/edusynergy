@@ -1,7 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-
+import 'package:frontend/state/post_provider.dart';
+import 'package:http/http.dart' as http;
+import '../pages/home.dart';
 import 'question_service.dart'; // Ensure correct import
-
+import 'package:frontend/state/auth_provider.dart';
+import 'package:frontend/state/post_provider.dart';
+import 'package:provider/provider.dart';
 class AskScreen extends StatefulWidget {
   const AskScreen({super.key});
 
@@ -13,29 +19,46 @@ class _AskScreenState extends State<AskScreen> {
   final TextEditingController _controller = TextEditingController();
   final QuestionService _questionService = QuestionService();
 
+
   Future<void> _submitQuestion() async {
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+
+    final userId = authProvider.userId;
     final questionText = _controller.text;
+    final username = authProvider.username;
+    if(questionText.isNotEmpty){
+        try{
+          final response = await http.post(
+            Uri.parse('http://127.0.0.1:8000/userInteraction/ask/'),
+            headers: {
+              'Content-Type': 'application/json; charset=UTF-8',
+            },
+            body: jsonEncode({
+              'userId' : userId,
+              'content' : questionText,
+              'username' : username
 
-    if (questionText.isNotEmpty) {
-      try {
-        await _questionService.submitQuestion(questionText);
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Question submitted successfully')),
-        );
-        _controller.clear();
+            }),
+          );
 
-        // Optionally redirect to a different page after successful submission
-        Navigator.pop(context); // Go back to the previous screen, if applicable
-      } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Failed to submit question')),
-        );
-      }
+
+
+          if(jsonDecode(response.body)['questionSent']){
+
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Home()),
+            );
+          }
+        }catch(e){
+          print(e);
+        }
     }
-  }
 
+  }
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Ask a Question'),

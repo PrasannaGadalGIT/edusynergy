@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -9,6 +11,39 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   String? selectedRole;
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+
+  final _usernameController = TextEditingController();
+  Future<void> _resetPassword() async {
+    final username = _usernameController.text;
+    final email = _emailController.text;
+
+    final password = _passwordController.text;
+    final confirmPassword = _confirmPasswordController.text;
+
+    final response = await http.post(
+      Uri.parse('http://127.0.0.1:8000/userauth/registerUser/'),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode({
+        'username' : username,
+        'email': email,
+        'password': password,
+        'role' : selectedRole,
+        'confirm_password' : confirmPassword
+
+      }),
+    );
+
+
+    if (response.statusCode == 200) {
+      final responseData = jsonDecode(response.body);
+      print(responseData['message']);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,9 +89,9 @@ class _RegisterState extends State<Register> {
                 ),
                 child: Column(
                   children: [
-                    _buildTextField('Username'),
+                    _buildTextField('Username', controller: _usernameController),
                     const SizedBox(height: 20),
-                    _buildTextField('Email'),
+                    _buildTextField('Email', controller: _emailController),
                     const SizedBox(height: 20),
                     Container(
                       height: 50,
@@ -72,24 +107,22 @@ class _RegisterState extends State<Register> {
                             value: selectedRole,
                             hint: const Text('Select Role'),
                             isExpanded: true,
-                            icon: const Icon(Icons.arrow_drop_down,
-                                color: Color(0xff0C0440)),
+                            icon: const Icon(Icons.arrow_drop_down, color: Color(0xff0C0440)),
                             style: const TextStyle(color: Color(0xff0C0440)),
                             items: <String>['Student', 'Educator']
                                 .map<DropdownMenuItem<String>>(
                                   (String value) => DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(30),
-                                        color: Colors.white,
-                                      ),
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 16.0),
-                                      child: Text(value),
-                                    ),
+                                value: value,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30),
+                                    color: Colors.white,
                                   ),
-                                )
+                                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                  child: Text(value),
+                                ),
+                              ),
+                            )
                                 .toList(),
                             onChanged: (String? newValue) {
                               setState(() {
@@ -101,13 +134,13 @@ class _RegisterState extends State<Register> {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    _buildTextField('Password', obscureText: true),
+                    _buildTextField('Password', controller: _passwordController, obscureText: true),
                     const SizedBox(height: 20),
-                    _buildTextField('Confirm Password', obscureText: true),
+                    _buildTextField('Confirm Password', controller: _confirmPasswordController, obscureText: true),
                     const SizedBox(height: 20),
                     GestureDetector(
                       onTap: () {
-                        // Implement your register functionality here
+                        _resetPassword();
                       },
                       child: Container(
                         height: 50,
@@ -145,7 +178,7 @@ class _RegisterState extends State<Register> {
   }
 
   // Helper function to build text fields with consistent styling
-  Widget _buildTextField(String hintText, {bool obscureText = false}) {
+  Widget _buildTextField(String hintText, {bool obscureText = false, TextEditingController? controller}) {
     return Container(
       height: 50,
       width: 300,
@@ -156,6 +189,7 @@ class _RegisterState extends State<Register> {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: TextField(
+          controller: controller,
           obscureText: obscureText,
           decoration: InputDecoration(
             border: InputBorder.none,
@@ -164,10 +198,10 @@ class _RegisterState extends State<Register> {
             prefixIcon: hintText == 'Username'
                 ? const Icon(Icons.person, color: Color(0xff0C0440))
                 : hintText == 'Email'
-                    ? const Icon(Icons.email, color: Color(0xff0C0440))
-                    : hintText == 'Password' || hintText == 'Confirm Password'
-                        ? const Icon(Icons.lock, color: Color(0xff0C0440))
-                        : null,
+                ? const Icon(Icons.email, color: Color(0xff0C0440))
+                : hintText == 'Password' || hintText == 'Confirm Password'
+                ? const Icon(Icons.lock, color: Color(0xff0C0440))
+                : null,
           ),
         ),
       ),
